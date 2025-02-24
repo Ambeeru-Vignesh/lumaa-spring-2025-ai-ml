@@ -1,6 +1,7 @@
 # Import required libraries
 import pandas as pd
 import numpy as np
+import os
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import defaultdict
@@ -17,7 +18,13 @@ class EnhancedMovieRecommender:
         """Load the IMDB movies dataset from a local CSV file."""
         try:
             print("Loading local dataset...")
-            df = pd.read_csv("imdb_top_1000.csv")
+            script_dir = os.path.dirname(os.path.abspath(__file__))
+
+            # Construct the file path
+            csv_path = os.path.join(script_dir, "imdb_top_1000.csv")
+
+            # Load the dataset
+            df = pd.read_csv(csv_path)
             print("Successfully loaded local dataset")
             return df
         except Exception as e:
